@@ -97,7 +97,8 @@ public class AddressBookServiceTest {
 		Person pedro = new Person();
 		pedro.setName("Pedro");
 		URI pedroURI = URI.create("http://localhost:8282/contacts/person/2");
-		response = client.target("http://localhost:8282/contacts")
+		Client client2 = ClientBuilder.newClient();
+		response = client2.target("http://localhost:8282/contacts")
 				.request(MediaType.APPLICATION_JSON)
 				.post(Entity.entity(pedro, MediaType.APPLICATION_JSON));
 		List<Person> listAfter=response.readEntity(AddressBook.class).getPersonList();
