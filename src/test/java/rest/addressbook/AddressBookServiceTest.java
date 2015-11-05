@@ -279,6 +279,8 @@ public class AddressBookServiceTest {
 				.target("http://localhost:8282/contacts/person/2").request()
 				.delete();
 		assertEquals(204, response.getStatus());
+		response = client.target("http://localhost:8282/contacts")
+				.request().get();
 		List<Person> listBefore=response.readEntity(AddressBook.class).getPersonList();
 
 		// Verify that the user has been deleted
@@ -292,6 +294,8 @@ public class AddressBookServiceTest {
 		//////////////////////////////////////////////////////////////////////
 		response = client.target("http://localhost:8282/contacts/person/2").request()
 				.delete();
+		response = client.target("http://localhost:8282/contacts")
+				.request().get();
 		List<Person> listAfter=response.readEntity(AddressBook.class).getPersonList();
 		assertEquals(listBefore.size(), listAfter.size());
 		assertEquals(listBefore, listAfter);
