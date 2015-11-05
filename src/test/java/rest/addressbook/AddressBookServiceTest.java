@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.io.IOException;
 import java.net.URI;
+import java.util.List;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -33,6 +34,7 @@ public class AddressBookServiceTest {
 	public void serviceIsAlive() throws IOException {
 		// Prepare server
 		AddressBook ab = new AddressBook();
+		List<Person> listBefore=ab.getPersonList();
 		launchServer(ab);
 
 		// Request the address book
@@ -40,13 +42,14 @@ public class AddressBookServiceTest {
 		Response response = client.target("http://localhost:8282/contacts")
 				.request().get();
 		assertEquals(200, response.getStatus());
-		assertEquals(0, response.readEntity(AddressBook.class).getPersonList()
-				.size());
+		List<Person> listAfter=response.readEntity(AddressBook.class).getPersonList();
 
 		//////////////////////////////////////////////////////////////////////
 		// Verify that GET /contacts is well implemented by the service, i.e
 		// test that it is safe and idempotent
-		//////////////////////////////////////////////////////////////////////	
+		//////////////////////////////////////////////////////////////////////
+		assertEquals(listBefore.size(), listAfter.size());
+		assertEquals(listBefore, listAfter);
 	}
 
 	@Test
@@ -73,7 +76,7 @@ public class AddressBookServiceTest {
 		assertEquals(juan.getName(), juanUpdated.getName());
 		assertEquals(1, juanUpdated.getId());
 		assertEquals(juanURI, juanUpdated.getHref());
-
+		List<Person> listBefore=response.readEntity(AddressBook.class).getPersonList();
 		// Check that the new user exists
 		response = client.target("http://localhost:8282/contacts/person/1")
 				.request(MediaType.APPLICATION_JSON).get();
@@ -88,7 +91,12 @@ public class AddressBookServiceTest {
 		// Verify that POST /contacts is well implemented by the service, i.e
 		// test that it is not safe and not idempotent
 		//////////////////////////////////////////////////////////////////////	
-				
+		response = client.target("http://localhost:8282/contacts")
+				.request(MediaType.APPLICATION_JSON)
+				.post(Entity.entity(juan, MediaType.APPLICATION_JSON));
+		List<Person> listAfter=response.readEntity(AddressBook.class).getPersonList();
+		assertNotEquals(listBefore.size(), listAfter.size());
+		assertNotEquals(listBefore, listAfter);
 	}
 
 	@Test
@@ -143,7 +151,12 @@ public class AddressBookServiceTest {
 		// Verify that GET /contacts/person/3 is well implemented by the service, i.e
 		// test that it is safe and idempotent
 		//////////////////////////////////////////////////////////////////////	
-	
+		List<Person> listBefore=response.readEntity(AddressBook.class).getPersonList();
+		response = client.target("http://localhost:8282/contacts/person/3")
+				.request(MediaType.APPLICATION_JSON).get();
+		List<Person> listAfter=response.readEntity(AddressBook.class).getPersonList();
+		assertEquals(listBefore.size(), listAfter.size());
+		assertEquals(listBefore, listAfter);
 	}
 
 	@Test
@@ -155,8 +168,9 @@ public class AddressBookServiceTest {
 		salvador.setName("Salvador");
 		Person juan = new Person();
 		juan.setName("Juan");
-		ab.getPersonList().add(salvador);
-		ab.getPersonList().add(juan);
+		List<Person> listBefore=ab.getPersonList();
+		listBefore.add(salvador);
+		listBefore.add(juan);
 		launchServer(ab);
 
 		// Test list of contacts
@@ -174,8 +188,13 @@ public class AddressBookServiceTest {
 		//////////////////////////////////////////////////////////////////////
 		// Verify that POST is well implemented by the service, i.e
 		// test that it is not safe and not idempotent
-		//////////////////////////////////////////////////////////////////////	
-	
+		//////////////////////////////////////////////////////////////////////
+		response = client.target("http://localhost:8282/contacts")
+				.request(MediaType.APPLICATION_JSON)
+				.post(Entity.entity(javier, MediaType.APPLICATION_JSON));
+		List<Person> listAfter=response.readEntity(AddressBook.class).getPersonList();
+		assertNotEquals(listBefore.size(), listAfter.size());
+		assertNotEquals(listBefore, listAfter);
 	}
 
 	@Test
@@ -217,6 +236,7 @@ public class AddressBookServiceTest {
 		assertEquals(maria.getName(), mariaRetrieved.getName());
 		assertEquals(2, mariaRetrieved.getId());
 		assertEquals(juanURI, mariaRetrieved.getHref());
+		List<Person> listBefore=response.readEntity(AddressBook.class).getPersonList();
 
 		// Verify that only can be updated existing values
 		response = client.target("http://localhost:8282/contacts/person/3")
@@ -228,7 +248,12 @@ public class AddressBookServiceTest {
 		// Verify that PUT /contacts/person/2 is well implemented by the service, i.e
 		// test that it is idempotent
 		//////////////////////////////////////////////////////////////////////	
-	
+		response = client.target("http://localhost:8282/contacts/person/2")
+				.request(MediaType.APPLICATION_JSON)
+				.put(Entity.entity(maria, MediaType.APPLICATION_JSON));
+		List<Person> listAfter=response.readEntity(AddressBook.class).getPersonList();
+		assertEquals(listBefore.size(), listAfter.size());
+		assertEquals(listBefore, listAfter);
 	}
 
 	@Test
@@ -251,6 +276,7 @@ public class AddressBookServiceTest {
 				.target("http://localhost:8282/contacts/person/2").request()
 				.delete();
 		assertEquals(204, response.getStatus());
+		List<Person> listBefore=response.readEntity(AddressBook.class).getPersonList();
 
 		// Verify that the user has been deleted
 		response = client.target("http://localhost:8282/contacts/person/2")
@@ -260,8 +286,12 @@ public class AddressBookServiceTest {
 		//////////////////////////////////////////////////////////////////////
 		// Verify that DELETE /contacts/person/2 is well implemented by the service, i.e
 		// test that it is idempotent
-		//////////////////////////////////////////////////////////////////////	
-
+		//////////////////////////////////////////////////////////////////////
+		response = client.target("http://localhost:8282/contacts/person/2").request()
+				.delete();
+		List<Person> listAfter=response.readEntity(AddressBook.class).getPersonList();
+		assertEquals(listBefore.size(), listAfter.size());
+		assertEquals(listBefore, listAfter);
 	}
 
 	@Test
