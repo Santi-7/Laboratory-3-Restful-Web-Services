@@ -1,22 +1,28 @@
 package rest.addressbook;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import static rest.addressbook.PhoneType.*;
 
 /**
  * A phone number 
  *
  */
+@ApiModel(value="PhoneNumber", description="Phone number of a contact")
 public class PhoneNumber {
 	
 	private String number;
 	private PhoneType type = HOME;
 
+	@ApiModelProperty(position = 1, required = true, value = "Phone number")
 	public String getNumber() {
 		return number;
 	}
 	public void setNumber(String number) {
 		this.number = number;
 	}
+	@ApiModelProperty(position = 2, required = true, value = "Type of number")
 	public PhoneType getType() {
 		return type;
 	}
