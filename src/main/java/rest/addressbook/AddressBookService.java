@@ -3,7 +3,6 @@ package rest.addressbook;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiError;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -76,11 +75,6 @@ public class AddressBookService {
 		notes = "Returns the contact with specified id.",
 		response = Person.class
 	)
-	@ApiErrors(
-		value = { @ApiError(
-				code = 404,
-				reason = "Contact not found")}
-	)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getPerson(
 		@ApiParam(value = "ID of the contact that needs to be fetched", required = true)
@@ -107,11 +101,6 @@ public class AddressBookService {
 		value = "Update Person",
 		notes = "Modifies a person managed in the adressbook.",
 		response = Person.class
-	)
-	@ApiErrors(
-		value = { @ApiError(
-				code = 400,
-				reason = "Id of contact not managed in adressbook")}
 	)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response updatePerson(@Context UriInfo info,
@@ -140,11 +129,6 @@ public class AddressBookService {
 	@ApiOperation(
 		value = "Delete Person",
 		notes = "Delete a contact of the adressbook."
-	)
-	@ApiErrors(
-		value = { @ApiError(
-				code = 404,
-				reason = "Contact not found")}
 	)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response updatePerson(
