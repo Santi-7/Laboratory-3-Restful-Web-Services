@@ -1,4 +1,4 @@
-package com.edwise.pocs.swagger.config;
+package rest.adressbook;
  
 import com.mangofactory.swagger.configuration.SpringSwaggerConfig;
 import com.mangofactory.swagger.plugin.SwaggerSpringMvcPlugin;
