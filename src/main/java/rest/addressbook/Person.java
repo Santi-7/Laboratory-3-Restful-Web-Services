@@ -20,7 +20,7 @@ public class Person {
 	private URI href;
 	private List<PhoneNumber> phoneList = new ArrayList<PhoneNumber>();
 	
-	@ApiModelProperty(position = 1, requited = true, value = "Contact's name")
+	@ApiModelProperty(position = 1, required = true, value = "Contact's name")
 	public String getName() {
 		return name;
 	}
