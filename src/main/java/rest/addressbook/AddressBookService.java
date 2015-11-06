@@ -68,7 +68,7 @@ public class AddressBookService {
 	@Path("/person/{id}")
 	@ApiOperation(
 		value = "Get Person",
-		notes = "Returns the contact with specified id."
+		notes = "Returns the contact with specified id.",
 		response = Person.class
 	)
 	@ApiErrors(
@@ -100,7 +100,7 @@ public class AddressBookService {
 	@Path("/person/{id}")
 	@ApiOperation(
 		value = "Update Person",
-		notes = "Modifies a person managed in the adressbook."
+		notes = "Modifies a person managed in the adressbook.",
 		response = Person.class
 	)
 	@ApiErrors(
