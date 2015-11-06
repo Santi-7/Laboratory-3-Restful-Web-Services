@@ -1,14 +1,7 @@
 package rest.addressbook;
 
 import javax.inject.Inject;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -17,9 +10,10 @@ import javax.ws.rs.core.UriInfo;
 
 /**
  * A service that manipulates contacts in an address book.
- *
  */
 @Path("/contacts")
+@Api(value = "/contacts", description = "Operations to manage an adressBook")
+@Produces({"application/json", "application/xml"})
 public class AddressBookService {
 
 	/**
@@ -33,6 +27,11 @@ public class AddressBookService {
 	 * @return a JSON representation of the address book.
 	 */
 	@GET
+	@ApiOperation(
+		value = "Get AdressBook",
+		notes = "Returns the adress book.",
+		response = AddressBook.class
+	)
 	@Produces(MediaType.APPLICATION_JSON)
 	public AddressBook getAddressBook() {
 		return addressBook;
@@ -45,8 +44,15 @@ public class AddressBookService {
 	 * @return a JSON representation of the new entry that should be available at /contacts/person/{id}.
 	 */
 	@POST
+	@ApiOperation(
+		value = "Add Person",
+		notes = "Add a contact to the adressbook.",
+		response = Person.class
+	)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response addPerson(@Context UriInfo info, Person person) {
+	public Response addPerson(@Context UriInfo info,
+		@ApiParam(value = "Person that wants to be added", required = true) Person person)
+	{
 		addressBook.getPersonList().add(person);
 		person.setId(addressBook.nextId());
 		person.setHref(info.getAbsolutePathBuilder().path("person/{id}").build(person.getId()));
@@ -60,8 +66,21 @@ public class AddressBookService {
 	 */
 	@GET
 	@Path("/person/{id}")
+	@ApiOperation(
+		value = "Get Person",
+		notes = "Returns the contact with specified id."
+		response = Person.class
+	)
+	@ApiErrors(
+		value = { @ApiError(
+				code = 404,
+				reason = "Contact not found")}
+	)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getPerson(@PathParam("id") int id) {
+	public Response getPerson(
+		@ApiParam(value = "ID of the contact that needs to be fetched", required = true)
+		@PathParam("id") int id)
+	{
 		for (Person p : addressBook.getPersonList()) {
 			if (p.getId() == id) {
 				return Response.ok(p).build();
@@ -79,9 +98,22 @@ public class AddressBookService {
 	 */
 	@PUT
 	@Path("/person/{id}")
+	@ApiOperation(
+		value = "Update Person",
+		notes = "Modifies a person managed in the adressbook."
+		response = Person.class
+	)
+	@ApiErrors(
+		value = { @ApiError(
+				code = 400,
+				reason = "Id of contact not managed in adressbook")}
+	)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response updatePerson(@Context UriInfo info,
-			@PathParam("id") int id, Person person) {
+		@ApiParam(value = "ID of the contact that wants to be modified", required = true)
+		@PathParam("id") int id,
+		@ApiParam(value = "Updated contact", required = true) Person person)
+	{
 		for (int i = 0; i < addressBook.getPersonList().size(); i++) {
 			if (addressBook.getPersonList().get(i).getId() == id) {
 				person.setId(id);
@@ -100,8 +132,20 @@ public class AddressBookService {
 	 */
 	@DELETE
 	@Path("/person/{id}")
+	@ApiOperation(
+		value = "Delete Person",
+		notes = "Delete a contact of the adressbook."
+	)
+	@ApiErrors(
+		value = { @ApiError(
+				code = 404,
+				reason = "Contact not found")}
+	)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response updatePerson(@PathParam("id") int id) {
+	public Response updatePerson(
+		@ApiParam(value = "ID of the contact that is going to be deleted", required = true)
+		@PathParam("id") int id)
+	{
 		for (int i = 0; i < addressBook.getPersonList().size(); i++) {
 			if (addressBook.getPersonList().get(i).getId() == id) {
 				addressBook.getPersonList().remove(i);
@@ -110,5 +154,4 @@ public class AddressBookService {
 		}
 		return Response.status(Status.NOT_FOUND).build();
 	}
-
 }
