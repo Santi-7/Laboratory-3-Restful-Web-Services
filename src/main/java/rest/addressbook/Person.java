@@ -28,7 +28,7 @@ public class Person {
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	@ApiModelProperty(position = 2, required = true, value = "Contact's id")
 	public int getId() {
 		return id;
 	}
@@ -36,7 +36,7 @@ public class Person {
 	public void setId(int id) {
 		this.id = id;
 	}
-
+	@ApiModelProperty(position = 3, required = true, value = "Contact's email")
 	public String getEmail() {
 		return email;
 	}
@@ -45,6 +45,7 @@ public class Person {
 		this.email = email;
 	}
 
+	@ApiModelProperty(position = 4, value = "Contact's phone list")
 	public List<PhoneNumber> getPhoneList() {
 		return phoneList;
 	}
@@ -64,7 +65,7 @@ public class Person {
 	public void setHref(URI href) {
 		this.href = href;
 	}
-	
+	@ApiModelProperty(position = 5, required = true, value = "Contact's uri")
 	public URI getHref() {
 		return href;
 	}
