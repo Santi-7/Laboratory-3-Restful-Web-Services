@@ -78,8 +78,8 @@ public class AddressBookService {
 	)
 	@ApiResponses(value = {
     		@ApiResponse(code = 200, message = "Successful retrieval of user detail", response = Person.class),
-    		@ApiResponse(code = 404, message = "User with given id does not exist"
-	}
+    		@ApiResponse(code = 404, message = "User with given id does not exist")}
+    	)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getPerson(
 		@ApiParam(value = "ID of the contact that needs to be fetched", required = true)
