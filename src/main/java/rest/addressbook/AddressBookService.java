@@ -3,6 +3,7 @@ package rest.addressbook;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -75,6 +76,10 @@ public class AddressBookService {
 		notes = "Returns the contact with specified id.",
 		response = Person.class
 	)
+	@ApiResponses(value = {
+    		@ApiResponse(code = 200, message = "Successful retrieval of user detail", response = Person.class),
+    		@ApiResponse(code = 404, message = "User with given id does not exist"
+	}
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getPerson(
 		@ApiParam(value = "ID of the contact that needs to be fetched", required = true)
