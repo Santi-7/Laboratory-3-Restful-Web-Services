@@ -1,5 +1,8 @@
 package rest.addressbook;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +11,7 @@ import java.util.List;
  * A person entry in an address book
  *
  */
+@ApiModel(value="Person", description="Description of a person that is managed in the adressbook")
 public class Person {
 
 	private String name;
@@ -16,6 +20,7 @@ public class Person {
 	private URI href;
 	private List<PhoneNumber> phoneList = new ArrayList<PhoneNumber>();
 	
+	@ApiModelProperty(position = 1, requited = true, value = "Contact's name")
 	public String getName() {
 		return name;
 	}
