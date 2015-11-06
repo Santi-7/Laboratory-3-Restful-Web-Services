@@ -18,8 +18,8 @@ public class userService extends JavaHelp {
     @GET
     @Path("/contacts")
     @ApiOperation(
-            //value = "Devuelve todos los usuarios",
-            //notes = "Devuelve todos los usuarios del sistema"
+            value = "Devuelve todos los usuarios",
+            notes = "Devuelve todos los usuarios del sistema"
     )
     public Response listUsers() {
         // código
@@ -28,8 +28,8 @@ public class userService extends JavaHelp {
     @GET
     @Path("/contacts/person/{id}")
     @ApiOperation(
-            //value = "Busca un usuario por ID",
-            //notes = "Devuelve los datos relativos a un usuario"
+            value = "Busca un usuario por ID",
+            notes = "Devuelve los datos relativos a un usuario"
     )
     public Response findById(
             @ApiParam(value = "ID del usuario a buscar", allowableValues = "range[1," + Integer.MAX_VALUE + "]", required = true)
