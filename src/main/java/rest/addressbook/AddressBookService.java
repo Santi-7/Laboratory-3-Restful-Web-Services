@@ -55,6 +55,9 @@ public class AddressBookService {
 		notes = "Add a contact to the adressbook.",
 		response = Person.class
 	)
+	@ApiResponses(value = {
+    		@ApiResponse(code = 200, message = "Successful addition of user detail", response = Person.class)}
+    	)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response addPerson(@Context UriInfo info,
 		@ApiParam(value = "Person that wants to be added", required = true) Person person)
@@ -108,6 +111,10 @@ public class AddressBookService {
 		notes = "Modifies a person managed in the adressbook.",
 		response = Person.class
 	)
+	@ApiResponses(value = {
+    		@ApiResponse(code = 200, message = "Successful modification of user detail", response = Person.class),
+    		@ApiResponse(code = 400, message = "User with given id does not exist")}
+    	)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response updatePerson(@Context UriInfo info,
 		@ApiParam(value = "ID of the contact that wants to be modified", required = true)
@@ -136,6 +143,10 @@ public class AddressBookService {
 		value = "Delete Person",
 		notes = "Delete a contact of the adressbook."
 	)
+	@ApiResponses(value = {
+    		@ApiResponse(code = 200, message = "Successful deletion of user detail"),
+    		@ApiResponse(code = 404, message = "User with given id does not exist")}
+    	)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response updatePerson(
 		@ApiParam(value = "ID of the contact that is going to be deleted", required = true)
