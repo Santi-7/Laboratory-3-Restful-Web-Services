@@ -29,7 +29,7 @@ public class Server {
 		ab.getPersonList().add(salvador);
 		ab.getPersonList().add(juan);
 		
-		URI uri = UriBuilder.fromUri("http://localhost/").port(8080).build();
+		URI uri = UriBuilder.fromUri("http://localhost/").port(8282).build();
 		HttpServer server = GrizzlyHttpServerFactory.createHttpServer(uri,
 				new ApplicationConfig(ab));
 		try (Scanner scan = new Scanner(System.in)){
