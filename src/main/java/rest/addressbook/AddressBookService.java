@@ -82,7 +82,7 @@ public class AddressBookService {
 	)
 	@ApiResponses(value = {
     		@ApiResponse(code = 200, message = "Successful retrieval of user detail", response = Person.class),
-    		@ApiResponse(code = 404, message = "User with given id does not exist")}
+    		@ApiResponse(code = 404, message = "User with given id does not exist", response = Error.class)}
     	)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getPerson(
@@ -94,7 +94,7 @@ public class AddressBookService {
 				return Response.ok(p).build();
 			}
 		}
-		return Response.status(Status.NOT_FOUND).build();
+		return Response.status(Status.NOT_FOUND).entity(new Error(404, "Contact not found")).build();
 	}
 
 	/**
