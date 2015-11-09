@@ -2,7 +2,7 @@
 
 ## What is Swagger?
 
-Swagger is a a specification and complete framework implementation for describing, producing, consuming, and visualizing RESTful web services. As a specification, it is language-agnostic. With Swagger's declarative resource specification, clients can understand and consume services without knowledge of server implementation or access to the server code. More info can be found at [Swagger page](http://swagger.io/)
+Swagger is a a specification and complete framework implementation for describing, producing, consuming, and visualizing RESTful web services. As a specification, it is language-agnostic. With Swagger's declarative resource specification, clients can understand and consume services without knowledge of server implementation or access to the server code. More info can be found at [Swagger page](http://swagger.io/).
 
 It is composed of various modules, such as:
 
