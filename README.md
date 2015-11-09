@@ -9,6 +9,7 @@ It is composed of various modules, such as:
 * Swagger Ui
 
 It is a HTML (+JS+CSS) application that allows to generate documentation from a Swagger API. The Swagger UI framework allows both developers and non-developers to interact with the API in a sandbox UI that gives clear insight into how the API responds to parameters and options. The sandbox has this appearance.
+
 ![Example of documentation generation](http://img.scoop.it/B_LNqfPaH-b3STEXHVQ-qTl72eJkfbmt4t8yenImKBXEejxNn4ZJNZ2ss5Ku7Cxt "Example of documentation generation")
 
 We open Swagger UI local with `http://localhost:8282/api/resources.json`
