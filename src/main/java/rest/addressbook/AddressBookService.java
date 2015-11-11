@@ -1,7 +1,5 @@
 package rest.addressbook;
 
-import com.wordnik.swagger.jaxrs.JavaHelp; 
-
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -22,7 +20,7 @@ import javax.ws.rs.core.UriInfo;
 @Path("/contacts")
 @Api(value = "/contacts", description = "Operations to manage an adressBook")
 @Produces({"application/json", "application/xml"})
-public class AddressBookService extends JavaHelp {
+public class AddressBookService {
 
 	/**
 	 * The (shared) address book object. 
