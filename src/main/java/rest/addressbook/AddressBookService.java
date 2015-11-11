@@ -1,5 +1,6 @@
 package rest.addressbook;
 
+import com.wordnik.swagger.jaxrs.JavaHelp;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -20,7 +21,7 @@ import javax.ws.rs.core.UriInfo;
  *
  */
 @Path("/contacts")
-public class AddressBookService {
+public class AddressBookService extends JavaHelp {
 
 	/**
 	 * The (shared) address book object. 
