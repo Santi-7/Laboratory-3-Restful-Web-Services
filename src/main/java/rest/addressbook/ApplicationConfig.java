@@ -12,16 +12,16 @@ public class ApplicationConfig extends ResourceConfig  {
      * @param addressBook a provided address book
      */
     public ApplicationConfig(final AddressBook addressBook) {
-    	resources.add(AddressBookService.class);
-    	resources.add(MOXyJsonProvider.class);
-    	resources.add(new AbstractBinder() {
+    	register(AddressBookService.class);
+    	register(MOXyJsonProvider.class);
+    	register(new AbstractBinder() {
 		@Override
 		protected void configure() {
 			bind(myAddress).to(AddressBook.class);
 		}
     	});
-        resources.add(io.swagger.jaxrs.listing.ApiListingResource.class);
-        resources.add(io.swagger.jaxrs.listing.SwaggerSerializers.class);
+        register(io.swagger.jaxrs.listing.ApiListingResource.class);
+        register(io.swagger.jaxrs.listing.SwaggerSerializers.class);
         
     	BeanConfig beanConfig = new BeanConfig();
         beanConfig.setVersion("1.0.2");
