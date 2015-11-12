@@ -18,7 +18,7 @@ public class ApplicationConfig extends ResourceConfig {
         beanConfig.setHost("localhost:8282");
         beanConfig.setBasePath("/api");
         beanConfig.setResourcePackage("rest.addressbook");
-        beanConfig.setScan(true)/
+        beanConfig.setScan(true);
     }
 
 
