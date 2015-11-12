@@ -17,7 +17,7 @@ public class ApplicationConfig extends ResourceConfig  {
     	register(new AbstractBinder() {
 		@Override
 		protected void configure() {
-			bind(myAddress).to(AddressBook.class);
+			bind(addressBook).to(AddressBook.class);
 		}
     	});
         register(io.swagger.jaxrs.listing.ApiListingResource.class);
