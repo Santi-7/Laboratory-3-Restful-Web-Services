@@ -12,13 +12,13 @@ public class ApplicationConfig extends ResourceConfig {
      */
     public ApplicationConfig() {
     	this(new AddressBook());
-    	/*BeanConfig beanConfig = new BeanConfig();
+    	BeanConfig beanConfig = new BeanConfig();
         beanConfig.setVersion("1.0.2");
         beanConfig.setSchemes(new String[]{"http"});
         beanConfig.setHost("localhost:8282");
         beanConfig.setBasePath("/api");
         beanConfig.setResourcePackage("rest.addressbook");
-        beanConfig.setScan(true);*/
+        beanConfig.setScan(true)/
     }
 
 
