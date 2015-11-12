@@ -36,6 +36,7 @@ public class ApplicationConfig extends ResourceConfig {
     	Set<Class<?>> resources = new HashSet();
     	resources.add(io.swagger.jaxrs.listing.ApiListingResource.class);
     	resources.add(io.swagger.jaxrs.listing.SwaggerSerializers.class);
+    	return resources;
     }
 
 }
