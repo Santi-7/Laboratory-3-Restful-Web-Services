@@ -26,7 +26,16 @@ public class ApplicationConfig extends ResourceConfig {
 			@Override
 			protected void configure() {
 				bind(addressBook).to(AddressBook.class);
-			}});
-	}	
+			}
+    		
+    	});
+    }
+    
+    @Override
+    public Set<Class<?>> getClasses() {
+    	Set<Class<?>> resources = new HashSet();
+    	resources.add(io.swagger.jaxrs.listing.ApiListingResource.class);
+    	resources.add(io.swagger.jaxrs.listing.SwaggerSerializers.class);
+    }
 
 }
