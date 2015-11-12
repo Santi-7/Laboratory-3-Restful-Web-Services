@@ -3,7 +3,7 @@ package rest.addressbook;
 import org.eclipse.persistence.jaxb.rs.MOXyJsonProvider;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.server.ResourceConfig;
-import org.mentabean.*;
+import io.swagger.jaxrs.config.BeanConfig;
 
 public class ApplicationConfig extends ResourceConfig {
 
