@@ -27,8 +27,8 @@ public class ApplicationConfig extends ResourceConfig  {
         beanConfig.setVersion("1.0.2");
         beanConfig.setSchemes(new String[]{"http"});
         beanConfig.setHost("localhost:8282");
-        beanConfig.setBasePath("/");
-        beanConfig.setResourcePackage("io.swagger.resources");
+        beanConfig.setBasePath("/api");
+        beanConfig.setResourcePackage("io.swagger.resources,rest.addressbook");
         beanConfig.setScan(true);
     }
 }
