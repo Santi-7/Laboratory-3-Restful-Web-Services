@@ -27,8 +27,6 @@ public class ApplicationConfig extends ResourceConfig {
      * @param addressBook a provided address book
      */
     public ApplicationConfig(final AddressBook addressBook) {
-    	register(io.swagger.jaxrs.listing.ApiListingResource.class);
-    	register(io.swagger.jaxrs.listing.SwaggerSerializers.class);
     	register(AddressBookService.class);
     	register(MOXyJsonProvider.class);
     	register(new AbstractBinder() {
@@ -39,5 +37,7 @@ public class ApplicationConfig extends ResourceConfig {
 			}
     		
     	});
+    	register(io.swagger.jaxrs.listing.ApiListingResource.class);
+    	register(io.swagger.jaxrs.listing.SwaggerSerializers.class);
     }
 }
