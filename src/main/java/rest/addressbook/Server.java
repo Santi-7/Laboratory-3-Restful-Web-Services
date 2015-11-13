@@ -10,7 +10,9 @@ import javax.ws.rs.core.UriBuilder;
 
 import org.glassfish.grizzly.Grizzly;
 import org.glassfish.grizzly.http.server.HttpServer;
+import org.glassfish.jersey.servlet.ServletContainer;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
+import org.glassfish.jersey.grizzly2.servlet.GrizzlyWebContainerFactory;
 
 public class Server {
 	private static final Logger LOGGER = Grizzly.logger(Server.class);
