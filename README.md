@@ -50,4 +50,4 @@ We have to do the following steps:
 
 ![JSON with Swagger documentation](http://i64.tinypic.com/11bjcsn.png "JSON with Swagger documentation")
 
-We can download Swagger [Swagger UI](https://github.com/swagger-api/swagger-ui) to have a good looking interface.
+We can download [Swagger UI](https://github.com/swagger-api/swagger-ui) to have a good looking interface.
