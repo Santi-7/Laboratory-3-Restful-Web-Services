@@ -29,3 +29,25 @@ Stand-alone Swagger server written in Java that shows how to set up Swagger in y
 * Swagger CodeGen
 
 It offers a templates engine to generate client code in different languages.
+
+## How do we use Swagger?
+
+We have to do the following steps:
+
+1) We import Swagger dependencies in `build.gradle`.
+
+2) We documentate our code with Swagger annotations. In this service, I have documentated the classes `AddressBookService, Person, PhoneNumber`
+
+3) We have to hook up our api with Swagger. This is made by adding Swagger's configuration. You can check it in `ApplicationConfig.java`
+
+4) We have to create a ServletContainer to take use of Swagger service.
+
+    URI uri = UriBuilder.fromUri("http://localhost/").port(8282).build();
+	  ServletContainer sc = new ServletContainer(new ApplicationConfig(ab));
+	  HttpServer server = GrizzlyWebContainerFactory.create(uri, sc, null, null);`
+	  
+5) We run the server (`gradle server`) and go to Swagger service (`http://localhost:8282/swagger.json`). And we get the documentation we wanted.
+
+![JSON with Swagger documentation](http://i64.tinypic.com/11bjcsn.png "JSON with Swagger documentation")
+
+We can download Swagger [Swagger UI](https://github.com/swagger-api/swagger-ui) to have a good looking interface.
