@@ -15,7 +15,7 @@ import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 public class Server {
 	private static final Logger LOGGER = Grizzly.logger(Server.class);
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		LOGGER.setLevel(Level.FINER);
 		AddressBook ab = new AddressBook();
 		
@@ -30,8 +30,10 @@ public class Server {
 		ab.getPersonList().add(juan);
 		
 		URI uri = UriBuilder.fromUri("http://localhost/").port(8282).build();
-		HttpServer server = GrizzlyHttpServerFactory.createHttpServer(uri,
-				new ApplicationConfig(ab));
+		ServletContainer sc = new ServletContainer(new ApplicationConfig(ab));
+		HttpServer server = GrizzlyWebContainerFactory.create(uri, sc, null, null);
+		//HttpServer server = GrizzlyHttpServerFactory.createHttpServer(uri,
+		//		new ApplicationConfig(ab));
 		try (Scanner scan = new Scanner(System.in)){
 			server.start();
 			LOGGER.info("Press 's'+'enter' to shutdown now the server...");
