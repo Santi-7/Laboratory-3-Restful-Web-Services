@@ -12,8 +12,6 @@ It is a HTML (+JS+CSS) application that allows to generate documentation from a 
 
 ![Example of documentation generation](http://img.scoop.it/B_LNqfPaH-b3STEXHVQ-qTl72eJkfbmt4t8yenImKBXEejxNn4ZJNZ2ss5Ku7Cxt "Example of documentation generation")
 
-We open Swagger UI local with `http://localhost:8282/api/resources.json`
-
 * Swagger Core
 
 It defines the Java annotations and the required logic to generate a Swagger client or server.
